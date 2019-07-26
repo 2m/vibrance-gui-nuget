@@ -16,5 +16,4 @@ after_deploy:
 - ps: >-
     choco apikey -k $env:choco_api_key -source https://chocolatey.org/
 
-    choco pack
-    choco push vibrancegui.2.3.1.1.nupkg -s https://chocolatey.org/
+    choco push -s https://chocolatey.org/
