@@ -8,13 +8,6 @@ test_script:
     choco pack
 
     choco install vibrancegui -s "$pwd" -f
-deploy:
-- provider: Local
-  on:
-    appveyor_repo_tag: true
-after_deploy:
-- ps: >-
-    choco apikey -k $env:choco_api_key -source https://chocolatey.org/
-    pwd
-    dir
-    choco push vibrancegui.2.3.1.1.nupkg -s https://chocolatey.org/
+deploy_script:
+- IF DEFINED %APPVEYOR_REPO_TAG_NAME% choco apikey -k $env:choco_api_key -source https://chocolatey.org/
+- IF DEFINED %APPVEYOR_REPO_TAG_NAME% choco push vibrancegui.2.3.1.1.nupkg -s https://chocolatey.org/
